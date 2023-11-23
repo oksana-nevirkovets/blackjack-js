@@ -2,7 +2,7 @@ import { Button, Flex, Grid, Heading } from "@chakra-ui/react";
 import { FC } from "react";
 import Cards from "../Cards/Cards";
 
-const Board: FC<any> = ({ dealer, player, onHit, onStand }) => {
+const GameTable: FC<any> = ({ dealer, player, onHit, onStand }) => {
   if (!dealer || !player) {
     return (
       <Heading as="h3" size="2xl" color="gray.50" mt="30">
@@ -36,4 +36,4 @@ const Board: FC<any> = ({ dealer, player, onHit, onStand }) => {
   );
 };
 
-export default Board;
+export default GameTable;

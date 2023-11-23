@@ -14,3 +14,9 @@ export interface Player {
   points: number;
   isPlayerTurn: boolean;
 }
+
+export interface GameData {
+  cards: Card[];
+  dealer: Dealer;
+  player: Player;
+}

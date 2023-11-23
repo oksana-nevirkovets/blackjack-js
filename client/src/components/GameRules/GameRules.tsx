@@ -15,7 +15,7 @@ const ListItemWithIcon: FC<Props> = ({ children }) => {
   );
 };
 
-const Rules: FC = () => {
+const GameRules: FC = () => {
   return (
     <Box overflowY="auto">
       <Text fontSize="md" mb="4">
@@ -77,4 +77,4 @@ const Rules: FC = () => {
   );
 };
 
-export default Rules;
+export default GameRules;

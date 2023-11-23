@@ -11,7 +11,7 @@ import {
 import { FC } from "react";
 import { GrPowerReset } from "react-icons/gr";
 import { PiQuestion } from "react-icons/pi";
-import Rules from "../Rules/Rules";
+import GameRules from "../GameRules/GameRules";
 import { HeaderProps } from "./Header.type";
 
 const Header: FC<HeaderProps> = ({ onGameStart }) => {
@@ -36,7 +36,7 @@ const Header: FC<HeaderProps> = ({ onGameStart }) => {
       </Flex>
       <Slide direction="top" in={isOpen} style={{ zIndex: 10 }}>
         <Box p="40px" color="blackAlpha.800" mt="20" bg="gray.50" shadow="md" maxHeight="90vh">
-          <Rules />
+          <GameRules />
         </Box>
       </Slide>
     </>
