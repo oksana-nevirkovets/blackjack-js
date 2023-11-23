@@ -1,7 +1,7 @@
-import { GameEvents, GameMessages } from "../constants";
-import Game from "../models/game";
-import { GameDocument } from "../types/game";
-import { WebSocketWithSessionData } from "../types/websocket";
+import { GameEvents, GameMessages } from '../constants';
+import Game from '../models/game';
+import { GameDocument } from '../types/game';
+import { WebSocketWithSessionData } from '../types/websocket';
 
 export class TableGameController {
   static async startGame(socket: WebSocketWithSessionData) {
@@ -27,7 +27,7 @@ export class TableGameController {
     const gameId = socket.sessionData?.gameId;
     if (!gameId) return;
 
-    Game.findById(gameId).then((game) => {
+    Game.findById(gameId).then(game => {
       if (!game) return;
 
       game.getCardForPlayer();
@@ -54,11 +54,9 @@ export class TableGameController {
     const gameId = socket.sessionData?.gameId;
     if (!gameId) return;
 
-    Game.findById(gameId).then((game) => {
+    Game.findById(gameId).then(game => {
       if (!game) return;
-      socket.send(
-        JSON.stringify({ event: GameEvents.SHOW_MESSAGE, message: GameMessages.DEALERS_TURN })
-      );
+      socket.send(JSON.stringify({ event: GameEvents.SHOW_MESSAGE, message: GameMessages.DEALERS_TURN }));
       TableGameController.dealerIsPlaying(socket, game, () => {
         TableGameController.getResults(socket);
       });
@@ -72,7 +70,6 @@ export class TableGameController {
     drawInterval = 1500
   ): void {
     game.setDealerTurn();
-    game.save();
     const drawCardInterval = setInterval(async () => {
       if (game && game.shouldDealerDrawCard()) {
         game.getCardForDealer();
@@ -121,7 +118,7 @@ export class TableGameController {
   }
 
   static async delay(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 

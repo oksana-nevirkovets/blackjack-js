@@ -1,10 +1,10 @@
-import { Card } from "../types/game";
+import { Card } from '../types/game';
 
 export function calculatePoints(hand: Card[]): number {
   let points = 0;
   let countAce = 0;
-  hand.map((card) => {
-    if (card.face === "A") {
+  hand.map(card => {
+    if (card.face === 'A') {
       countAce += 11;
     }
     points += getCardValue(card.face);
@@ -23,7 +23,7 @@ export function reCalculatePointsWithAce(points: number, countAce: number): numb
 
 export function getCardValue(nominal: string): number {
   if (isNaN(Number(nominal))) {
-    if (nominal === "A") {
+    if (nominal === 'A') {
       return 11;
     }
     return 10;
@@ -33,9 +33,9 @@ export function getCardValue(nominal: string): number {
 }
 
 export function buildDeck(): Card[] {
-  const faces = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-  const suits = ["S", "D", "H", "C"];
-  const deck = suits.map((suit) => faces.map((face) => ({ id: face + "-" + suit, face }))).flat();
+  const faces = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  const suits = ['S', 'D', 'H', 'C'];
+  const deck = suits.map(suit => faces.map(face => ({ id: face + '-' + suit, face }))).flat();
   return deck;
 }
 

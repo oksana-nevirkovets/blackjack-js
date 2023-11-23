@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { GameInfoMessageProps } from "./GameInfoMessage.type";
-import { Fade, Flex, Heading } from "@chakra-ui/react";
+import { FC } from 'react';
+import { GameInfoMessageProps } from './GameInfoMessage.type';
+import { Fade, Flex, Heading } from '@chakra-ui/react';
 
 const GameInfoMessage: FC<GameInfoMessageProps> = ({ message }) => {
   return (

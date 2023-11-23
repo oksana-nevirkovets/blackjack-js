@@ -1,10 +1,10 @@
-import { ChakraProvider, Container } from "@chakra-ui/react";
-import GameTable from "./components/GameTable/GameTable";
-import Header from "./components/Header/Header";
-import GameInfoMessage from "./components/GameInfoMessage/GameInfoMessage";
-import StartGameModal from "./components/StartGameModal/StartGameModal";
-import { theme } from "./theme";
-import useWebSocketService from "./services/WebSocketService";
+import { ChakraProvider, Container } from '@chakra-ui/react';
+import GameTable from './components/GameTable/GameTable';
+import Header from './components/Header/Header';
+import GameInfoMessage from './components/GameInfoMessage/GameInfoMessage';
+import StartGameModal from './components/StartGameModal/StartGameModal';
+import { theme } from './theme';
+import useWebSocketService from './services/WebSocketService';
 
 function App() {
   const {

@@ -1,4 +1,4 @@
-import { Dealer, Player } from "../../types";
+import { Dealer, Player } from '../../types';
 
 export interface GameTableProps {
   dealer: Dealer;

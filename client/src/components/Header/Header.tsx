@@ -1,22 +1,13 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Slide,
-  Spacer,
-  useDisclosure,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import { FC } from "react";
-import { GrPowerReset } from "react-icons/gr";
-import { PiQuestion } from "react-icons/pi";
-import GameRules from "../GameRules/GameRules";
-import { HeaderProps } from "./Header.type";
+import { Box, Button, Flex, Heading, Slide, Spacer, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { FC } from 'react';
+import { GrPowerReset } from 'react-icons/gr';
+import { PiQuestion } from 'react-icons/pi';
+import GameRules from '../GameRules/GameRules';
+import { HeaderProps } from './Header.type';
 
 const Header: FC<HeaderProps> = ({ onGameStart }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
+  const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
 
   return (
     <>
@@ -27,10 +18,10 @@ const Header: FC<HeaderProps> = ({ onGameStart }) => {
         <Spacer />
         <Flex p="4" gap="6" alignItems="center">
           <Button colorScheme="teal" onClick={onGameStart} title="Reset Game">
-            {isLargerThan800 ? "Reset Game" : <GrPowerReset />}
+            {isLargerThan800 ? 'Reset Game' : <GrPowerReset />}
           </Button>
           <Button colorScheme="teal" onClick={onToggle} title="Rules">
-            {isLargerThan800 ? "Rules" : <PiQuestion />}
+            {isLargerThan800 ? 'Rules' : <PiQuestion />}
           </Button>
         </Flex>
       </Flex>

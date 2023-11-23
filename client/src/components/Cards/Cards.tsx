@@ -1,7 +1,7 @@
-import { Flex, Image } from "@chakra-ui/react";
-import { FC } from "react";
-import CardBack from "../../assets/card-back.svg";
-import { CardsProps } from "./Cards.type";
+import { Flex, Image } from '@chakra-ui/react';
+import { FC } from 'react';
+import CardBack from '../../assets/card-back.svg';
+import { CardsProps } from './Cards.type';
 
 const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
   return (
@@ -15,8 +15,8 @@ const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
             w="100px"
             h="fit-content"
             pos="relative"
-            left={index !== 0 ? "-50px" : 0}
-            mr={index !== 0 ? "-50px" : 0}
+            left={index !== 0 ? '-50px' : 0}
+            mr={index !== 0 ? '-50px' : 0}
             filter="drop-shadow(-3px 2px 6px RGBA(0, 0, 0, 0.74))"
           />
         );

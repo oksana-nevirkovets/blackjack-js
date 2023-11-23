@@ -1,12 +1,9 @@
 module.exports = {
-  preset: "ts-jest",
-  testEnvironment: "node",
-  roots: ["tests"],
-  globals: {
-    "ts-jest": {
-      diagnostics: {
-        ignoreCodes: ["TS151001"],
-      },
-    },
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['tests'],
+  testMatch: ['**/?(*.)+(spec|test).+(ts|tsx)'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
 };

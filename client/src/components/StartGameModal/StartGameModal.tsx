@@ -1,13 +1,8 @@
-import { Button, Fade, Flex, Heading } from "@chakra-ui/react";
-import { FC } from "react";
-import { StartGameModalProps } from "./StartGameModal.type";
+import { Button, Fade, Flex, Heading } from '@chakra-ui/react';
+import { FC } from 'react';
+import { StartGameModalProps } from './StartGameModal.type';
 
-const StartGameModal: FC<StartGameModalProps> = ({
-  onGameStart,
-  message,
-  dealerPoints,
-  playerPoints,
-}) => {
+const StartGameModal: FC<StartGameModalProps> = ({ onGameStart, message, dealerPoints, playerPoints }) => {
   return (
     <Fade in={true} delay={0.75}>
       <Flex
