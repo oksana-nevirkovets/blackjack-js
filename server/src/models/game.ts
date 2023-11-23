@@ -4,10 +4,6 @@ import { GameDocument } from "../types/game";
 
 const gameSchema = new Schema({
   cards: Array,
-  isGameInProgress: {
-    type: Boolean,
-    default: false,
-  },
   dealer: {
     hand: Array,
     hiddenCards: Array,
@@ -22,7 +18,7 @@ const gameSchema = new Schema({
       type: Number,
       default: 0,
     },
-    isPlaying: {
+    isPlayerTurn: {
       type: Boolean,
       default: true,
     },
@@ -39,6 +35,14 @@ gameSchema.methods.setDealerPoints = function (): void {
   this.dealer.points = calculatePoints(this.dealer.hand);
 };
 
+gameSchema.methods.setPlayerTurn = function (): void {
+  this.player.isPlayerTurn = true;
+};
+
+gameSchema.methods.setDealerTurn = function (): void {
+  this.player.isPlayerTurn = false;
+};
+
 gameSchema.methods.getCardForPlayer = function () {
   const card = this.cards.shift();
   this.player.hand.push(card);
@@ -46,12 +50,12 @@ gameSchema.methods.getCardForPlayer = function () {
 };
 
 gameSchema.methods.getCardForDealer = function () {
-  const card = this.dealer.hiddenCards.pop() ?? this.cards.shift();
+  const card = this.dealer.hiddenCards?.pop() ?? this.cards.shift();
   this.dealer.hand.push(card);
   this.setDealerPoints();
 };
 
-gameSchema.methods.gethiddenCardsForDealer = function () {
+gameSchema.methods.getHiddenCardsForDealer = function () {
   const card = this.cards.shift();
   this.dealer.hiddenCards = card;
 };
@@ -71,9 +75,10 @@ gameSchema.methods.isBlackjack = function (): boolean {
 gameSchema.methods.isLost = function (): boolean {
   return (
     (this.player.points < 21 &&
+      this.dealer.points >= 17 &&
       this.dealer.points <= 21 &&
       this.player.points < this.dealer.points) ||
-    this.player.points < 21
+    this.player.points > 21
   );
 };
 
@@ -82,7 +87,11 @@ gameSchema.methods.isDraw = function (): boolean {
 };
 
 gameSchema.methods.isWon = function (): boolean {
-  return this.player.points > this.dealer.points && this.player.points <= 21;
+  return (
+    (this.player.points > this.dealer.points ||
+      (this.player.points < this.dealer.points && this.dealer.points > 21)) &&
+    this.player.points <= 21
+  );
 };
 
 gameSchema.methods.startGame = function (): void {
@@ -91,12 +100,7 @@ gameSchema.methods.startGame = function (): void {
     this.getCardForPlayer();
   }
   this.getCardForDealer();
-  this.gethiddenCardsForDealer();
-  this.isGameInProgress = true;
-};
-
-gameSchema.methods.endGame = function (): void {
-  this.isGameInProgress = false;
+  this.getHiddenCardsForDealer();
 };
 
 gameSchema.methods.resetGame = function () {
@@ -105,6 +109,7 @@ gameSchema.methods.resetGame = function () {
   this.dealer.hiddenCards = undefined;
   this.player.points = 0;
   this.player.hand = [];
+  this.setPlayerTurn();
 };
 
 const Game = mongoose.model<GameDocument>("Game", gameSchema);

@@ -8,6 +8,7 @@ export const GameMessages = {
 
 export const GameEvents = {
   SHOW_MESSAGE: "showMessage",
+  END_GAME: "endGame",
   HIT: "hit",
   STAND: "stand",
   START_GAME: "startGame",

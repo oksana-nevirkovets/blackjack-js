@@ -15,11 +15,10 @@ export class TableGameController {
     if (game?.isBlackjack()) {
       socket.send(
         JSON.stringify({
-          event: GameEvents.SHOW_MESSAGE,
+          event: GameEvents.END_GAME,
           message: GameMessages.BLACKJACK,
         })
       );
-      game.endGame();
     }
   }
 
@@ -36,7 +35,7 @@ export class TableGameController {
       if (game.isLost()) {
         socket.send(
           JSON.stringify({
-            event: GameEvents.SHOW_MESSAGE,
+            event: GameEvents.END_GAME,
             message: GameMessages.YOU_LOST,
           })
         );
@@ -71,6 +70,8 @@ export class TableGameController {
     callback: () => void,
     drawInterval = 1500
   ): void {
+    game.setDealerTurn();
+    game.save();
     const drawCardInterval = setInterval(async () => {
       if (game && game.shouldDealerDrawCard()) {
         game.getCardForDealer();
@@ -89,12 +90,10 @@ export class TableGameController {
 
     Game.findById(gameId).then((game) => {
       if (!game) return;
-      game.endGame();
-      game.save();
       if (game.isLost()) {
         socket.send(
           JSON.stringify({
-            event: GameEvents.SHOW_MESSAGE,
+            event: GameEvents.END_GAME,
             message: GameMessages.YOU_LOST,
           })
         );
@@ -102,7 +101,7 @@ export class TableGameController {
       if (game.isDraw()) {
         socket.send(
           JSON.stringify({
-            event: GameEvents.SHOW_MESSAGE,
+            event: GameEvents.END_GAME,
             message: GameMessages.IT_IS_A_TIE,
           })
         );
@@ -110,7 +109,7 @@ export class TableGameController {
       if (game.isWon()) {
         socket.send(
           JSON.stringify({
-            event: GameEvents.SHOW_MESSAGE,
+            event: GameEvents.END_GAME,
             message: GameMessages.YOU_WON,
           })
         );

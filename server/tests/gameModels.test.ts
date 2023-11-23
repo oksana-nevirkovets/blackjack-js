@@ -10,7 +10,6 @@ describe("Game Model", () => {
     expect(game.player.hand.length).toBe(2);
     expect(game.dealer.hand.length).toBe(1); // One card face up
     expect(game.dealer.hiddenCards).not.toBeNull();
-    expect(game.isGameInProgress).toBe(true);
   });
   it("should allow player to hit and update points", () => {
     const game = new Game();

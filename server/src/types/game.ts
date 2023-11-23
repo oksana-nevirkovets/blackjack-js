@@ -10,18 +10,18 @@ export interface Card {
 
 export interface GameDocument extends Document {
   cards: Card[];
-  isGameInProgress: boolean;
   dealer: {
     hiddenCards: Card[];
     hand: Card[];
     points: number;
   };
   player: {
-    isPlaying: boolean;
+    isPlayerTurn: boolean;
     hand: Card[];
     points: number;
   };
   startGame(): void;
+  setDealerTurn(): void;
   getCardForPlayer(): void;
   getCardForDealer(): void;
   shouldPlayerDrawCard(): boolean;
@@ -30,6 +30,5 @@ export interface GameDocument extends Document {
   isLost(): boolean;
   isDraw(): boolean;
   isWon(): boolean;
-  endGame(): void;
   resetGame(): void;
 }

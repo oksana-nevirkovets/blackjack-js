@@ -9,7 +9,7 @@ import Game from "./models/game";
 import { WebSocketWithSessionData } from "./types/websocket";
 import { gameController } from "./controllers/gameController";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const MONGODB_URI =
   "mongodb+srv://oksananevirkovets:J9efA5AQ13ASZqwG@blackjack.0pthoxw.mongodb.net/?retryWrites=true&w=majority";
 
@@ -41,7 +41,8 @@ wss.on("connection", (socket: WebSocketWithSessionData) => {
   console.log("A socket connected");
 
   socket.on("message", (message) => {
-    const command = message.toString();
+    const command = JSON.parse(message.toString("utf-8")).event;
+    console.log({ command });
     gameController(socket, command);
   });
 
