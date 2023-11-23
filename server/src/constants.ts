@@ -7,9 +7,9 @@ export const GameMessages = {
 };
 
 export const GameEvents = {
-  SHOW_MESSAGE: "showMessage",
-  END_GAME: "endGame",
+  SHOW_MESSAGE: "show_message",
+  END_GAME: "end_game",
   HIT: "hit",
   STAND: "stand",
-  START_GAME: "startGame",
+  START_GAME: "start_game",
 };

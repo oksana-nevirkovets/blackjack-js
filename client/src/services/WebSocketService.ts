@@ -26,7 +26,7 @@ const useWebSocketService = (): UseWebSocketServiceReturn => {
 
   const processMessages = (event: { data: string }) => {
     const { event: gameEvent, data: socketData, message } = JSON.parse(event.data) || {};
-    const isGameEnded = gameEvent === "endGame";
+    const isGameEnded = gameEvent === "end_game";
 
     setGameMessage(message);
     setGameInProgress(!isGameEnded);
@@ -45,7 +45,7 @@ const useWebSocketService = (): UseWebSocketServiceReturn => {
   };
 
   const onStartGameButtonClick = () => {
-    sendJsonMessage({ event: "startGame" });
+    sendJsonMessage({ event: "start_game" });
   };
 
   useEffect(() => {

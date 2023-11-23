@@ -41,7 +41,6 @@ describe("Game Model", () => {
     expect(game.dealer.hand.pop()).toBe(hiddenCards);
     expect(game.dealer.points).toBeGreaterThan(initialPoints);
   });
-
   it("should correctly handle a tie (push) scenario", () => {
     const game = new Game();
     jest.spyOn(utils, "shuffleDeck").mockReturnValue([
@@ -56,24 +55,6 @@ describe("Game Model", () => {
 
     expect(game.isDraw()).toBeTruthy(); // It's a tie
   });
-
-  it("should correctly handle a player winning with more points", () => {
-    const game = new Game();
-    jest.spyOn(utils, "shuffleDeck").mockReturnValue([
-      { face: "J", id: "J-S" },
-      { face: "6", id: "6-S" }, // Player's initial cards
-      { face: "Q", id: "Q-H" },
-      { face: "8", id: "8-H" }, // Dealer's initial cards
-      { face: "3", id: "3-H" },
-    ]);
-
-    game.startGame();
-    game.getCardForPlayer();
-    game.getCardForDealer();
-
-    expect(game.isWon()).toBeTruthy();
-  });
-
   it("should recalculate Ace if the score is more than 21", () => {
     const game = new Game();
     jest.spyOn(utils, "shuffleDeck").mockReturnValue([
@@ -88,5 +69,64 @@ describe("Game Model", () => {
     expect(game.player.points).toBe(17);
     game.getCardForPlayer();
     expect(game.player.points).toBe(15);
+  });
+  describe("isWon method", () => {
+    it("should return true when the player has more points than the dealer", () => {
+      const game = new Game();
+      game.dealer.points = 17;
+      game.player.points = 18;
+
+      expect(game.isWon()).toBe(true);
+    });
+
+    it("should return false when the dealer has more points than the player", () => {
+      const game = new Game();
+      game.dealer.points = 17;
+      game.player.points = 15;
+
+      expect(game.isWon()).toBe(false);
+    });
+
+    it("should return true when the dealer busts and the player has not", () => {
+      const game = new Game();
+      game.dealer.points = 22;
+      game.player.points = 18;
+
+      expect(game.isWon()).toBe(true);
+    });
+
+    it("should return false when the player busts and the dealer has not", () => {
+      const game = new Game();
+      game.dealer.points = 18;
+      game.player.points = 22;
+
+      expect(game.isWon()).toBe(false);
+    });
+  });
+
+  describe("isLost method", () => {
+    it("should return true when the player has fewer points than the dealer and neither busted", () => {
+      const game = new Game();
+      game.dealer.points = 18;
+      game.player.points = 15;
+
+      expect(game.isLost()).toBe(true);
+    });
+
+    it("should return false when the player has more points than the dealer and neither busted", () => {
+      const game = new Game();
+      game.dealer.points = 18;
+      game.player.points = 19;
+
+      expect(game.isLost()).toBe(false);
+    });
+
+    it("should return true when the player busted", () => {
+      const game = new Game();
+      game.dealer.points = 3;
+      game.player.points = 25;
+
+      expect(game.isLost()).toBe(true);
+    });
   });
 });
