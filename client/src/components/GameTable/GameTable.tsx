@@ -16,7 +16,7 @@ const GameTable: FC<any> = ({ dealer, player, onHit, onStand }) => {
         <Heading as="h4" size="lg" color="gray.50">
           Dealer's Hand: <span>{dealer.hiddenCards?.length ? "?" : dealer.points}</span>
         </Heading>
-        {dealer.hand.length && <Cards cards={dealer.hand} />}
+        {dealer.hand.length && <Cards hiddenCards={dealer.hiddenCards} cards={dealer.hand} />}
       </Flex>
       <Grid templateColumns="repeat(2, 1fr)" gap="6">
         <Button colorScheme="teal" onClick={onHit} isDisabled={!player.isPlayerTurn}>

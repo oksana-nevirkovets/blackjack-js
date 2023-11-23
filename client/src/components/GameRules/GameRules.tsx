@@ -1,12 +1,8 @@
 import { Box, ListItem, List, Text, Icon } from "@chakra-ui/react";
 import { PiPokerChip } from "react-icons/pi";
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
-type Props = {
-  children: string | JSX.Element | JSX.Element[];
-};
-
-const ListItemWithIcon: FC<Props> = ({ children }) => {
+const ListItemWithIcon: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ListItem fontSize="sm">
       <Icon as={PiPokerChip} color="red.600" mr="1" w="4" />

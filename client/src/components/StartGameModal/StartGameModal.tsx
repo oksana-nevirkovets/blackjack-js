@@ -9,7 +9,7 @@ const StartGameModal: FC<StartGameModalProps> = ({
   playerPoints,
 }) => {
   return (
-    <Fade in={true}>
+    <Fade in={true} delay={0.75}>
       <Flex
         pos="fixed"
         top="0"

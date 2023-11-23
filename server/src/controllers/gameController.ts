@@ -4,7 +4,7 @@ import { GameDocument } from "../types/game";
 import { WebSocketWithSessionData } from "../types/websocket";
 
 export class TableGameController {
-  static startGame(socket: WebSocketWithSessionData): void {
+  static async startGame(socket: WebSocketWithSessionData) {
     const game = new Game();
     game.startGame();
     game.save();
@@ -13,6 +13,7 @@ export class TableGameController {
     };
     socket.send(JSON.stringify({ event: GameEvents.START_GAME, data: game }));
     if (game?.isBlackjack()) {
+      await TableGameController.delay(1500);
       socket.send(
         JSON.stringify({
           event: GameEvents.END_GAME,
@@ -84,39 +85,43 @@ export class TableGameController {
     }, drawInterval);
   }
 
-  static getResults(socket: WebSocketWithSessionData) {
+  static async getResults(socket: WebSocketWithSessionData) {
     const gameId = socket.sessionData?.gameId;
     if (!gameId) return;
 
-    Game.findById(gameId).then((game) => {
-      if (!game) return;
-      if (game.isLost()) {
-        socket.send(
-          JSON.stringify({
-            event: GameEvents.END_GAME,
-            message: GameMessages.YOU_LOST,
-          })
-        );
-      }
-      if (game.isDraw()) {
-        socket.send(
-          JSON.stringify({
-            event: GameEvents.END_GAME,
-            message: GameMessages.IT_IS_A_TIE,
-          })
-        );
-      }
-      if (game.isWon()) {
-        socket.send(
-          JSON.stringify({
-            event: GameEvents.END_GAME,
-            message: GameMessages.YOU_WON,
-          })
-        );
-      }
-      game.resetGame();
-      game.save();
-    });
+    const game = await Game.findById(gameId);
+    if (!game) return;
+    if (game.isLost()) {
+      socket.send(
+        JSON.stringify({
+          event: GameEvents.END_GAME,
+          message: GameMessages.YOU_LOST,
+        })
+      );
+    }
+    if (game.isDraw()) {
+      socket.send(
+        JSON.stringify({
+          event: GameEvents.END_GAME,
+          message: GameMessages.IT_IS_A_TIE,
+        })
+      );
+    }
+    if (game.isWon()) {
+      socket.send(
+        JSON.stringify({
+          event: GameEvents.END_GAME,
+          message: GameMessages.YOU_WON,
+        })
+      );
+    }
+    await TableGameController.delay(1500);
+    game.resetGame();
+    game.save();
+  }
+
+  static async delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
 

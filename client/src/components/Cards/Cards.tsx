@@ -1,8 +1,9 @@
 import { Flex, Image } from "@chakra-ui/react";
 import { FC } from "react";
+import CardBack from "../../assets/card-back.svg";
 import { CardsProps } from "./Cards.type";
 
-const Cards: FC<CardsProps> = ({ cards }) => {
+const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
   return (
     <Flex>
       {cards.map((card: any, index: number) => {
@@ -20,19 +21,22 @@ const Cards: FC<CardsProps> = ({ cards }) => {
           />
         );
       })}
+      {hiddenCards?.map(() => {
+        return (
+          <Image
+            src={CardBack}
+            alt="card back"
+            w="100px"
+            h="fit-content"
+            pos="relative"
+            left="-50px"
+            mr="-50px"
+            filter="drop-shadow(-3px 2px 6px RGBA(0, 0, 0, 0.74))"
+          />
+        );
+      })}
     </Flex>
   );
 };
 
 export default Cards;
-
-// 0% {
-//     transform: translate(-90px, -150px);
-// }
-
-// 50% {
-//     transform: translate(-50px, -50px);
-// }
-// 100% {
-//     transform: translate(0, 0);
-// }

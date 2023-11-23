@@ -20,24 +20,27 @@ function App() {
     <ChakraProvider theme={theme}>
       <Header onGameStart={onStartGameButtonClick} />
       <Container>
-        {isGameInProgress ? (
-          <>
-            <GameTable
-              dealer={gameData?.dealer}
-              player={gameData?.player}
-              onHit={onHitButtonClick}
-              onStand={onStandButtonClick}
+        <>
+          {gameData && (
+            <>
+              <GameTable
+                dealer={gameData?.dealer}
+                player={gameData?.player}
+                onHit={onHitButtonClick}
+                onStand={onStandButtonClick}
+              />
+              {gameMessage && isGameInProgress && <GameInfoMessage message={gameMessage} />}
+            </>
+          )}
+          {!isGameInProgress && (
+            <StartGameModal
+              onGameStart={onStartGameButtonClick}
+              message={gameMessage}
+              dealerPoints={gameData?.dealer?.points}
+              playerPoints={gameData?.player?.points}
             />
-            {gameMessage && <GameInfoMessage message={gameMessage} />}
-          </>
-        ) : (
-          <StartGameModal
-            onGameStart={onStartGameButtonClick}
-            message={gameMessage}
-            dealerPoints={gameData?.dealer?.points}
-            playerPoints={gameData?.player?.points}
-          />
-        )}
+          )}
+        </>
       </Container>
     </ChakraProvider>
   );
