@@ -6,10 +6,11 @@ import { CardsProps } from './Cards.type';
 const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
   return (
     <Flex>
-      {cards.map((card: any, index: number) => {
+      {cards.map((card, index) => {
         const cardImg = require(`../../assets/${card.id}.svg`);
         return (
           <Image
+            key={card.id}
             src={cardImg}
             alt={card.id}
             w="100px"
@@ -21,9 +22,10 @@ const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
           />
         );
       })}
-      {hiddenCards?.map(() => {
+      {hiddenCards?.map((card) => {
         return (
           <Image
+            key={card.id}
             src={CardBack}
             alt="card back"
             w="100px"

@@ -2,6 +2,11 @@
   "name": "blackjack",
   "version": "1.0.0",
   "description": "JavaScript Project",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm start",

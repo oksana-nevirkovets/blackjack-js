@@ -6,9 +6,9 @@ describe('Game Model', () => {
     const game = new Game();
     game.startGame();
 
-    expect(game.cards.length).toBe(48); // Assuming 2 cards are dealt to the player and 1 to the dealer
+    expect(game.cards.length).toBe(48);
     expect(game.player.hand.length).toBe(2);
-    expect(game.dealer.hand.length).toBe(1); // One card face up
+    expect(game.dealer.hand.length).toBe(1);
     expect(game.dealer.hiddenCards).not.toBeNull();
   });
   it('should allow player to hit and update points', () => {
