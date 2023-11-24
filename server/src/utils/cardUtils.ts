@@ -5,18 +5,18 @@ export function calculatePoints(hand: Card[]): number {
   let countAce = 0;
   hand.map(card => {
     if (card.face === 'A') {
-      countAce += 11;
+      countAce += 1;
     }
     points += getCardValue(card.face);
   });
 
-  if (points > 21 && countAce > 0) points = reCalculatePointsWithAce(points, countAce);
+  if (countAce > 0) points = reCalculatePointsWithAce(points, countAce);
   return points;
 }
 
 export function reCalculatePointsWithAce(points: number, countAce: number): number {
   for (let i = 0; i < countAce; i++) {
-    if (points > 21) points -= 10;
+    if (points + 10 <= 21) points += 10;
   }
   return points;
 }
@@ -24,7 +24,7 @@ export function reCalculatePointsWithAce(points: number, countAce: number): numb
 export function getCardValue(nominal: string): number {
   if (isNaN(Number(nominal))) {
     if (nominal === 'A') {
-      return 11;
+      return 1;
     }
     return 10;
   }

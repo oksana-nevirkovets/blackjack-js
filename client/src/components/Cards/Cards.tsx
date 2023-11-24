@@ -22,7 +22,7 @@ const Cards: FC<CardsProps> = ({ cards, hiddenCards }) => {
           />
         );
       })}
-      {hiddenCards?.map((card) => {
+      {hiddenCards?.map(card => {
         return (
           <Image
             key={card.id}

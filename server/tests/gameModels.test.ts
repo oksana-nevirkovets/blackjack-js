@@ -14,12 +14,11 @@ describe('Game Model', () => {
   it('should allow player to hit and update points', () => {
     const game = new Game();
     game.startGame();
-
-    const initialPoints = game.player.points;
+    game.player.points = 16;
     game.getCardForPlayer();
 
     expect(game.player.hand.length).toBe(3);
-    expect(game.player.points).toBeGreaterThan(initialPoints);
+    expect(game.player.points).toBeGreaterThan(16);
   });
   it("should correctly determine if a player's hand is a blackjack", () => {
     jest.spyOn(utils, 'shuffleDeck').mockReturnValue([
@@ -32,7 +31,7 @@ describe('Game Model', () => {
     game.startGame();
     expect(game.isBlackjack()).toBe(true);
   });
-  it('should update hand and point for dealer if there is a hidden card', () => {
+  it('should update hand and points for the dealer if there is a hidden card', () => {
     const game = new Game();
     game.startGame();
     const initialPoints = game.dealer.points;
