@@ -25,7 +25,6 @@ The goal of blackjack is to beat the dealer by having a hand value as close to 2
 - [React](https://reactjs.org) - JavaScript library for user interfaces
 - [TypeScript](https://www.typescriptlang.org)
 - [Chakra_UI](https://chakra-ui.com)
-- [ESLint](https://eslint.org)
 - [Prettier](https://prettier.io)
 - [Jest](https://jestjs.io)
 

@@ -40,6 +40,7 @@ export class TableGameController {
             message: GameMessages.YOU_LOST,
           })
         );
+        return;
       }
 
       if (!game.shouldPlayerDrawCard()) {

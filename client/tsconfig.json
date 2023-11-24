@@ -1,6 +1,7 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
+    "rootDir": ".",
     "lib": [
       "dom",
       "dom.iterable",
@@ -22,5 +23,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["node_modules", "dist"]
 }

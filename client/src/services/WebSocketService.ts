@@ -31,7 +31,7 @@ const useWebSocketService = (): UseWebSocketServiceReturn => {
     setGameMessage(message);
     setGameInProgress(!isGameEnded);
 
-    if (!isGameEnded && socketData) {
+    if (!isGameEnded && socketData?.player?.hand.length) {
       setGameData(socketData);
     }
   };
