@@ -1,6 +1,24 @@
 # blackjack-js
 
 ## Game Rules
+The goal of blackjack is to beat the dealer by having a hand value as close to 21 as possible without exceeding 21.
+### Initial Deal:
+- The player and the dealer, is dealt two cards.
+- Players' cards are usually dealt face up, while one of the dealer's cards is face up (known as the "upcard"), and the other is face down (the "hole card").
+
+### Player's Turn:
+- Players can choose to "hit" (receive another card) or "stand" (keep their current hand).
+- Players can continue to hit as many times as they ListItemke, but if the total value of their hand exceeds 21, they "bust" and lose the round.
+
+### Dealer's Turn:
+- The dealer reveals their hole card.
+- The dealer must hit until their hand value is 17 or higher.
+
+### Winning:
+- If a player's hand is closer to 21 than the dealer's hand without going over 21, the player wins.
+- If the dealer busts (exceeds 21), all remaining players win.
+- If both the player and the dealer have the same hand value, it's a "push" (a tie), and the player neither wins nor loses.
+- If a player is dealt an Ace and a 10-value card (10, Jack, Queen, King) as their initial two cards, it's called a "blackjack."
 
 ## Technologies
 
