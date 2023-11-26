@@ -18,7 +18,7 @@ export class TableGameController {
         JSON.stringify({
           event: GameEvents.END_GAME,
           message: GameMessages.BLACKJACK,
-        })
+        }),
       );
     }
   }
@@ -38,7 +38,7 @@ export class TableGameController {
           JSON.stringify({
             event: GameEvents.END_GAME,
             message: GameMessages.YOU_LOST,
-          })
+          }),
         );
         return;
       }
@@ -57,7 +57,9 @@ export class TableGameController {
 
     Game.findById(gameId).then(game => {
       if (!game) return;
-      socket.send(JSON.stringify({ event: GameEvents.SHOW_MESSAGE, message: GameMessages.DEALERS_TURN }));
+      socket.send(
+        JSON.stringify({ event: GameEvents.SHOW_MESSAGE, message: GameMessages.DEALERS_TURN }),
+      );
       TableGameController.dealerIsPlaying(socket, game, () => {
         TableGameController.getResults(socket);
       });
@@ -68,7 +70,7 @@ export class TableGameController {
     socket: WebSocketWithSessionData,
     game: GameDocument,
     callback: () => void,
-    drawInterval = 1500
+    drawInterval = 1500,
   ): void {
     game.setDealerTurn();
     const drawCardInterval = setInterval(async () => {
@@ -94,7 +96,7 @@ export class TableGameController {
         JSON.stringify({
           event: GameEvents.END_GAME,
           message: GameMessages.YOU_LOST,
-        })
+        }),
       );
     }
     if (game.isDraw()) {
@@ -102,7 +104,7 @@ export class TableGameController {
         JSON.stringify({
           event: GameEvents.END_GAME,
           message: GameMessages.IT_IS_A_TIE,
-        })
+        }),
       );
     }
     if (game.isWon()) {
@@ -110,7 +112,7 @@ export class TableGameController {
         JSON.stringify({
           event: GameEvents.END_GAME,
           message: GameMessages.YOU_WON,
-        })
+        }),
       );
     }
     await TableGameController.delay(1500);

@@ -1,4 +1,13 @@
-import { Box, Button, Flex, Heading, Slide, Spacer, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Slide,
+  Spacer,
+  useDisclosure,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import { FC } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 import { PiQuestion } from 'react-icons/pi';

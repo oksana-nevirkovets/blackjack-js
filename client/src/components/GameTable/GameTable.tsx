@@ -1,8 +1,9 @@
 import { Button, Flex, Grid, Heading } from '@chakra-ui/react';
 import { FC } from 'react';
 import Cards from '../Cards/Cards';
+import { GameTableProps } from './GameTable.type';
 
-const GameTable: FC<any> = ({ dealer, player, onHit, onStand }) => {
+const GameTable: FC<GameTableProps> = ({ dealer, player, onHit, onStand }) => {
   if (!dealer || !player) {
     return (
       <Heading as="h3" size="2xl" color="gray.50" mt="30">

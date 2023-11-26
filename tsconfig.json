@@ -1,31 +1,36 @@
 {
-    "compilerOptions": {
-      "incremental": true,
-      "outDir": "./dist",
-      "baseUrl": ".",
-      "moduleResolution": "Node",
-      "module": "CommonJS",
-      "target": "ES2018",
-      "sourceMap": true,
-      "lib": [
-        "esnext"
-      ],
-      "esModuleInterop": true,
-      "alwaysStrict": true,
-      "strictNullChecks": true,
-      "noImplicitAny": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "resolveJsonModule": true,
-    },
-    "references": [
-      {
-        "path": "client"
-      },
-      {
-        "path": "server"
-      }
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "composite": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "incremental": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ESNext"
     ],
-    "exclude": ["node_modules", "dist", "*.d.ts"]
-  }
+    "types": [
+      "node"
+    ],
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

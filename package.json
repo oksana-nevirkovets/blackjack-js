@@ -12,14 +12,30 @@
     "server": "cd server && npm start",
     "client": "cd client && npm start",
     "test": "cd server && npm test",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx}\"",
+    "lint": "eslint '**/*.{ts,tsx}' && prettier --check  **/*.{ts,tsx}",
+    "lint:fix": "eslint '**/*.{ts,tsx}' --fix && prettier --write  **/*.{ts,tsx}"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
     "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
     "prettier": "^3.1.0",
-    "typescript": "5.2.2"
+    "typescript": "^4.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }
