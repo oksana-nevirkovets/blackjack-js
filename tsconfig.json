@@ -27,7 +27,8 @@
       "ESNext"
     ],
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
   },
   "exclude": [

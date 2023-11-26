@@ -1,6 +1,6 @@
 import { Card } from '../../types';
 
-export interface CardsProps {
+export interface CardsListProps {
   cards: Card[];
   hiddenCards?: Card[];
 }
