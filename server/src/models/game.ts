@@ -26,7 +26,7 @@ const gameSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 1 * 60 * 60, // expires in one hour
+    expires: 24 * 60 * 60, // expires in 24 hours
   },
 });
 

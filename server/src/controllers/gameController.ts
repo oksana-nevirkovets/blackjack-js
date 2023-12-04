@@ -13,7 +13,19 @@ export class TableGameController {
     };
     socket.send(JSON.stringify({ event: GameEvents.START_GAME, data: game }));
     if (game?.isBlackjack()) {
+      game.getCardForDealer();
+
       await TableGameController.delay(1500);
+
+      if (game.isDraw()) {
+        socket.send(
+          JSON.stringify({
+            event: GameEvents.END_GAME,
+            message: GameMessages.IT_IS_A_TIE,
+          }),
+        );
+        return;
+      }
       socket.send(
         JSON.stringify({
           event: GameEvents.END_GAME,
