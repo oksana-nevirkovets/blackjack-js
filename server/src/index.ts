@@ -6,6 +6,7 @@ import session from 'express-session';
 import { Server } from 'ws';
 import MongoStore from 'connect-mongo';
 import { WebSocketWithSessionData } from './types/websocket';
+import { gameController } from './controllers/gameController';
 
 const PORT = process.env.PORT || 4000;
 const MONGODB_URI =
@@ -39,8 +40,8 @@ wss.on('connection', (socket: WebSocketWithSessionData) => {
   console.log('A socket connected');
 
   socket.on('message', message => {
-    // TODO
-    console.log(message);
+    const command = JSON.parse(message.toString('utf-8')).event;
+    gameController(socket, command);
   });
 
   socket.on('close', () => {
