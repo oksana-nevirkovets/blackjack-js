@@ -106,6 +106,16 @@ describe('Game Model', () => {
   });
 
   describe('isLost method', () => {
+    it('should return true when the dealer has a blackjack', () => {
+      const game = new Game() as GameDocument;
+      game.dealer.points = 21;
+      game.dealer.hand.length = 2;
+      game.player.points = 21;
+      game.player.hand.length = 4;
+
+      expect(game.isLost()).toBe(true);
+    });
+
     it('should return true when the player has fewer points than the dealer and neither busted', () => {
       const game = new Game() as GameDocument;
       game.dealer.points = 18;

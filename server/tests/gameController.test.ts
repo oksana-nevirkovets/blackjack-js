@@ -15,52 +15,6 @@ const mockedSocket = {
 } as unknown as WebSocketWithSessionData;
 
 describe('TableGameController', () => {
-  describe('startGame', () => {
-    let game: GameDocument;
-    beforeEach(() => {
-      game = new Game({ _id: gameId });
-      game.startGame();
-      jest.spyOn(Game.prototype, 'save').mockResolvedValueOnce(game);
-      jest.spyOn(Game.prototype, 'startGame').mockResolvedValueOnce(game);
-      jest.spyOn(Game.prototype, 'getCardForDealer').mockResolvedValueOnce(game);
-    });
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-    it('should start a new game and send the START_GAME event', async () => {
-      const mockedSocket = {
-        send: jest.fn(),
-      } as unknown as WebSocketWithSessionData;
-      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValueOnce(false);
-
-      await TableGameController.startGame(mockedSocket);
-
-      expect(Game.prototype.startGame).toHaveBeenCalled();
-      expect(Game.prototype.save).toHaveBeenCalled();
-      expect(Game.prototype.isBlackjack).toHaveBeenCalled();
-      expect(mockedSocket.send).toHaveBeenCalledTimes(1);
-    });
-    it('should send the END_GAME event with BLACKJACK message if the game is blackjack', async () => {
-      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValue(true);
-      jest.spyOn(Game.prototype, 'isDraw').mockReturnValue(false);
-      jest.spyOn(TableGameController, 'delay').mockImplementationOnce(() => Promise.resolve());
-
-      await TableGameController.startGame(mockedSocket);
-      expect(mockedSocket.send).toHaveBeenCalledWith(
-        JSON.stringify({ event: GameEvents.END_GAME, message: GameMessages.BLACKJACK }),
-      );
-    });
-    it('should send the IT_IS_A_TIE event if the player and the delear got a blackjack on the first two cards', async () => {
-      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValue(true);
-      jest.spyOn(Game.prototype, 'isDraw').mockReturnValue(true);
-      jest.spyOn(TableGameController, 'delay').mockImplementationOnce(() => Promise.resolve());
-
-      await TableGameController.startGame(mockedSocket);
-      expect(mockedSocket.send).toHaveBeenCalledWith(
-        JSON.stringify({ event: GameEvents.END_GAME, message: GameMessages.IT_IS_A_TIE }),
-      );
-    });
-  });
   describe('hit', () => {
     let game: GameDocument;
     beforeEach(() => {
@@ -128,6 +82,7 @@ describe('TableGameController', () => {
     const callbackMock = jest.fn();
     let game: GameDocument;
     beforeEach(() => {
+      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValue(false);
       game = new Game({ _id: gameId });
       game.startGame();
       jest.spyOn(game, 'save').mockResolvedValue(game);
@@ -247,6 +202,52 @@ describe('TableGameController', () => {
       expect(TableGameController.delay).toHaveBeenCalledWith(1500);
       expect(game.resetGame).toHaveBeenCalled();
       expect(game.save).toHaveBeenCalled();
+    });
+  });
+  describe('startGame', () => {
+    let game: GameDocument;
+    beforeEach(() => {
+      game = new Game({ _id: gameId });
+      game.startGame();
+      jest.spyOn(Game.prototype, 'save').mockResolvedValueOnce(game);
+      jest.spyOn(Game.prototype, 'startGame').mockResolvedValueOnce(game);
+      jest.spyOn(Game.prototype, 'getCardForDealer').mockResolvedValueOnce(game);
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('should start a new game and send the START_GAME event', async () => {
+      const mockedSocket = {
+        send: jest.fn(),
+      } as unknown as WebSocketWithSessionData;
+      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValueOnce(false);
+
+      await TableGameController.startGame(mockedSocket);
+
+      expect(Game.prototype.startGame).toHaveBeenCalled();
+      expect(Game.prototype.save).toHaveBeenCalled();
+      expect(Game.prototype.isBlackjack).toHaveBeenCalled();
+      expect(mockedSocket.send).toHaveBeenCalledTimes(1);
+    });
+    it('should send the END_GAME event with BLACKJACK message if the game is blackjack', async () => {
+      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValue(true);
+      jest.spyOn(Game.prototype, 'isDraw').mockReturnValue(false);
+      jest.spyOn(TableGameController, 'delay').mockImplementationOnce(() => Promise.resolve());
+
+      await TableGameController.startGame(mockedSocket);
+      expect(mockedSocket.send).toHaveBeenCalledWith(
+        JSON.stringify({ event: GameEvents.END_GAME, message: GameMessages.BLACKJACK }),
+      );
+    });
+    it('should send the IT_IS_A_TIE event if the player and the delear got a blackjack on the first two cards', async () => {
+      jest.spyOn(Game.prototype, 'isBlackjack').mockReturnValue(true);
+      jest.spyOn(Game.prototype, 'isDraw').mockReturnValue(true);
+      jest.spyOn(TableGameController, 'delay').mockImplementationOnce(() => Promise.resolve());
+
+      await TableGameController.startGame(mockedSocket);
+      expect(mockedSocket.send).toHaveBeenCalledWith(
+        JSON.stringify({ event: GameEvents.END_GAME, message: GameMessages.IT_IS_A_TIE }),
+      );
     });
   });
 });

@@ -15,7 +15,7 @@ export class TableGameController {
     if (game?.isBlackjack()) {
       game.getCardForDealer();
 
-      await TableGameController.delay(1500);
+      await this.delay(1500);
 
       if (game.isDraw()) {
         socket.send(
@@ -56,8 +56,8 @@ export class TableGameController {
       }
 
       if (!game.shouldPlayerDrawCard()) {
-        TableGameController.dealerIsPlaying(socket, game, () => {
-          TableGameController.getResults(socket);
+        this.dealerIsPlaying(socket, game, () => {
+          this.getResults(socket);
         });
       }
     });
@@ -72,8 +72,8 @@ export class TableGameController {
       socket.send(
         JSON.stringify({ event: GameEvents.SHOW_MESSAGE, message: GameMessages.DEALERS_TURN }),
       );
-      TableGameController.dealerIsPlaying(socket, game, () => {
-        TableGameController.getResults(socket);
+      this.dealerIsPlaying(socket, game, () => {
+        this.getResults(socket);
       });
     });
   }
@@ -127,7 +127,7 @@ export class TableGameController {
         }),
       );
     }
-    await TableGameController.delay(1500);
+    await this.delay(1500);
     game.resetGame();
     game.save();
   }

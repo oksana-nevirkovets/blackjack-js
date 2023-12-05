@@ -78,13 +78,14 @@ gameSchema.methods.isBlackjack = function (): boolean {
 };
 
 gameSchema.methods.isLost = function (): boolean {
-  return (
-    (this.player.points < 21 &&
-      this.dealer.points >= 17 &&
-      this.dealer.points <= 21 &&
-      this.player.points < this.dealer.points) ||
-    this.player.points > 21
-  );
+  const isDealerBlackjack = this.dealer.hand.length == 2 && this.dealer.points === 21;
+  const isPlayerBusted = this.player.points > 21;
+  const isPlayerBehindDealer =
+    this.player.points < 21 &&
+    this.dealer.points >= 17 &&
+    this.dealer.points <= 21 &&
+    this.player.points < this.dealer.points;
+  return isDealerBlackjack || isPlayerBusted || isPlayerBehindDealer;
 };
 
 gameSchema.methods.isDraw = function (): boolean {
@@ -92,11 +93,11 @@ gameSchema.methods.isDraw = function (): boolean {
 };
 
 gameSchema.methods.isWon = function (): boolean {
-  return (
-    (this.player.points > this.dealer.points ||
-      (this.player.points < this.dealer.points && this.dealer.points > 21)) &&
-    this.player.points <= 21
-  );
+  const playerHasHigherScore = this.player.points > this.dealer.points;
+  const dealerBusts = this.dealer.points > 21;
+  const playerNotBusts = this.player.points <= 21;
+
+  return (playerHasHigherScore || dealerBusts) && playerNotBusts;
 };
 
 gameSchema.methods.startGame = function (): void {
