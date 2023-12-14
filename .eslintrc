@@ -30,7 +30,10 @@
         "spaced-comment": "error",
         "quotes": [
             "error",
-            "single"
+            "single",
+            {
+                "avoidEscape": true
+            }
         ],
         "no-duplicate-imports": "error",
         "react/no-unescaped-entities": 0,

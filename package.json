@@ -14,7 +14,8 @@
     "test": "cd server && npm test",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint '**/*.{ts,tsx}' && prettier --check  **/*.{ts,tsx}",
-    "lint:fix": "eslint '**/*.{ts,tsx}' --fix && prettier --write  **/*.{ts,tsx}"
+    "lint:fix": "eslint '**/*.{ts,tsx}' --fix && prettier --write  **/*.{ts,tsx}",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -32,10 +33,5 @@
     "husky": "^8.0.3",
     "prettier": "^3.1.0",
     "typescript": "^4.9.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
   }
 }
