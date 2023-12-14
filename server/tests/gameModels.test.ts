@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import Game from '../src/models/game';
-import { GameDocument } from '../src/types/game';
-import * as utils from '../src/utils/cardUtils';
+import { Game } from '../src/models';
+import { GameDocument } from '../src/types';
+import * as utils from '../src/utils';
 
 describe('Game Model', () => {
   it('should start the game with initial conditions', () => {
