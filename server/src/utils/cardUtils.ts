@@ -1,4 +1,4 @@
-import { Card } from '../types/game';
+import { Card } from '../types';
 
 export function calculatePoints(hand: Card[]): number {
   let points = 0;

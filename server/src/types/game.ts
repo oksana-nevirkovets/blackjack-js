@@ -1,7 +1,4 @@
 import { Document } from 'mongoose';
-export interface SessionData {
-  gameId?: string;
-}
 
 export interface Card {
   id: string;

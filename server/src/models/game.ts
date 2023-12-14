@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { calculatePoints, shuffleDeck } from '../utils/cardUtils';
-import { GameDocument } from '../types/game';
+import { calculatePoints, shuffleDeck } from '../utils';
+import { GameDocument } from '../types';
 
 const gameSchema = new Schema({
   cards: Array,
@@ -118,5 +118,4 @@ gameSchema.methods.resetGame = function () {
   this.setPlayerTurn();
 };
 
-const Game = mongoose.model<GameDocument>('Game', gameSchema);
-export default Game;
+export const Game = mongoose.model<GameDocument>('Game', gameSchema);

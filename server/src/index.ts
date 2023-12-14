@@ -5,8 +5,8 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import { Server } from 'ws';
 import MongoStore from 'connect-mongo';
-import { WebSocketWithSessionData } from './types/websocket';
-import { gameController } from './controllers/gameController';
+import { WebSocketWithSessionData } from './types';
+import { gameController } from './controllers';
 
 const PORT = process.env.PORT || 4000;
 const MONGODB_URI =
