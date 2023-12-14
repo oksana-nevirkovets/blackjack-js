@@ -5,17 +5,13 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import { Server } from 'ws';
 import MongoStore from 'connect-mongo';
-import { WebSocketWithSessionData } from './types';
 import { gameController } from './controllers';
-
-const PORT = process.env.PORT || 4000;
-const MONGODB_URI =
-  'mongodb+srv://oksananevirkovets:J9efA5AQ13ASZqwG@blackjack.0pthoxw.mongodb.net/?retryWrites=true&w=majority';
+import { WebSocketWithSessionData } from './types';
+import config from './config';
 
 const app = express();
-
 mongoose
-  .connect(MONGODB_URI, { family: 4 })
+  .connect(config.MONGODB_URI, { family: 4 })
   .then(() => console.log('🧉 Connected to database'))
   .catch(error => console.error('Could not connect to database', error));
 
@@ -24,7 +20,7 @@ app.use(cors());
 const httpServer = http.createServer(app);
 
 const sessionParser = session({
-  secret: 'secret',
+  secret: config.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   store: MongoStore.create({
@@ -49,6 +45,6 @@ wss.on('connection', (socket: WebSocketWithSessionData) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}/`);
+httpServer.listen(config.PORT, () => {
+  console.log(`🚀 Server ready at http://localhost:${config.PORT}/`);
 });

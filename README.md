@@ -28,11 +28,15 @@ The goal of blackjack is to beat the dealer by having a hand value as close to 2
 
 ## Technologies
 
-- [React](https://reactjs.org) - JavaScript library for user interfaces
+- [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org)
-- [Chakra_UI](https://chakra-ui.com)
-- [Prettier](https://prettier.io)
 - [Jest](https://jestjs.io)
+- [Chakra_UI](https://chakra-ui.com)
+- [ESLint](https://eslint.org)
+- [Prettier](https://prettier.io)
+- [Husky](https://typicode.github.io/husky/#/)
+- [mongoose](https://mongoosejs.com/)
+- [express](https://expressjs.com/)
 
 ## Install
 
@@ -42,7 +46,13 @@ yarn install
 
 ## Running locally
 
-In order to run the app locally you need to run the following command from root of the repo:
+In order to run the app locally you need to rename `.env.example` file to `.env` and populate `MONGODB_URI` to be able to use constants needed for the successful website work.
+
+```
+MONGODB_URI=mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<DB_URL>/?retryWrites=true&w=majority;
+```
+
+Run the development server:
 
 ```
 yarn start
